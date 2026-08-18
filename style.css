@@ -1,0 +1,215 @@
+@font-face {
+  font-family: pokemonfont;
+  src: url(assets/fonts/pokemon_solid.ttf);
+}
+
+h1 {
+    font-family: pokemonfont;
+    color: #ffcb05;
+    font-size: 60px;
+    text-align: center;
+
+    width: fit-content;
+    margin: 1px auto 0;
+
+    letter-spacing: 8px;
+
+    -webkit-text-stroke: 16px #3c5aa6;
+    paint-order: stroke fill;
+
+    }
+
+p {
+    background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+    border: 3px solid #4a4a4a;
+    border-radius: 18px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow:
+        0 0 8px rgba(255, 105, 180, 0.4),
+        inset 0 0 10px rgba(255,255,255,0.6);
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 4px;
+    background-color: #2a75bb;
+    border: 6px solid #ffcb05;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow:
+        0 0 0 4px #1f3c88,
+        0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+th, td {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    background: linear-gradient(
+        to bottom,
+        #ffffff,
+        #e9eef3
+    );
+    border: 2px solid #1f3c88;
+    border-radius: 10px;
+
+    padding: 15px;
+}
+
+th {
+    background: linear-gradient(
+        to bottom,
+        #ffdf4d,
+        #ffcb05
+    );
+    color: #1f3c88;
+    font-weight: bold;
+}
+
+td {
+    transition:
+        transform 0.2s,
+        background-color 0.2s,
+        box-shadow 0.2s;
+}
+
+h2 {
+    text-align: center; /*zentriert den Text von allen h2 Elementen*/
+    text-decoration: underline; /* unterstreicht den Text */
+}
+
+.liste { /* erstellt den Pokedex-Bildschirm, auf dem die historischen Ereignisse angezeigt werden */
+    background: linear-gradient(to bottom, #dff7f4, #a9ddd8);
+    border: 5px solid #263b3d;
+    border-radius: 15px;
+    padding: 12px 18px;
+    color: #172426;
+
+    box-shadow:
+        inset 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.liste ul { /* setzt die Position der Liste */
+    margin: 0;
+    padding-left: 25px;
+}
+
+.liste li { /* größerer Zeilenabstand für die Liste */
+    margin: 10px 0;
+    line-height: 1.2;
+}
+
+.leds { /* legt Position und Abstand der LEDs am Pokedex fest */
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.led { /* erstellt das die runden LEDs am Pokedex */
+    width: 16px;
+    height: 16px;
+    border: 2px solid #333;
+    border-radius: 50%;
+}
+
+.blau { /* erstellt die blaue LED am Pokedex und gibt ihr einen Glow */
+    background-color: #49bfff;
+    box-shadow: 0 0 10px #49bfff;
+}
+
+.rot { /* erstellt die rote LED am Pokedex */
+    background-color: #ff3b30;
+}
+
+.gelb { /* erstellt die gelbe LED am Pokedex */
+    background-color: #ffd60a;
+}
+
+body {
+    max-width: 1200px; /*bestimmt die Breite der Seite*/
+    font-family: Verdana, Geneva, Tahoma, sans-serif; /*ändert die Schriftart*/
+    margin: auto; /*zentriert die gesamte Seite in der mitte*/
+    min-height: 100vh; /*legt die Mindesthöhe für body fest*/
+    background-image: url(assets/images/pokemonworld_trans50.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.content {
+    display: flex; /*ermöglicht, dass der Kalender und die historischen Ereignisse nebeneinander stehen können*/
+    align-items: center; /*zentriert alle Elemente in der Klasse*/
+    gap: 50px; /*bestimmt den Abstand vom Kalander zu dem Element daneben*/
+}
+
+.ereignisse { /* erstellt den Pokedex-Rahmen */
+    background: linear-gradient(to bottom, #e3350d, #b51d00); /* färbt die Oberfläche des Pokedex in einem leichten Gradient, um realer zu wirken */
+    border: 6px solid #7a1200; /* gibt dem Pokedex einen dunkelroten Rahmen */
+    border-radius: 25px; /* rundet die Ecken des Pokedex ab */
+    padding: 20px;
+
+    box-shadow: /* erstellt einen inset Shadow um den Rahmen des Pokedex schöner zu machen */
+        inset 0 0 0 4px #ff7252,
+        0 12px 20px rgba(0, 0, 0, 0.35);
+}
+
+.ereignisse h2 { /* macht die h2 im Pokedex weiß und gibt ihr einen Schatten */
+    color: white;
+
+    margin-top: 0;
+
+    text-shadow:
+        0 2px 2px rgba(0,0,0,.4);
+}
+
+.highlight { /* erzeugt ein Pokéballähnlichen Look am heutigen Tag im Kalender */
+    background: linear-gradient(
+        to bottom,
+        #e53935 0%,
+        #e53935 47%,
+        #222 47%,
+        #222 53%,
+        white 53%,
+        white 100%
+    ); 
+
+    position: relative;
+    font-weight: bold;
+    color: white;
+    -webkit-text-stroke: 4px #000000;
+    paint-order: stroke fill;
+    border-radius: 50%;
+}
+
+.isHoliday { /* fügt ein festliches Bild in td's, wenn dieser Tag ein Feiertag ist */
+    background-image: url(assets/images/tile_holiday2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.saturdays {
+    background: linear-gradient(to bottom, #d9f2ff, #8fd3ff);
+}
+
+.sundays {
+    background: linear-gradient(to bottom, #ffd9d9, #ff9f9f);
+}
+
+td:hover { /* erzeugt den Hover-Effekt im Kalender */
+    transform: scale(1.08); /* macht das gehoverte td 1,08x größer */
+    background: #ffef9a; /* setzt die Hintergrundfarbe beim Hovern */
+    cursor: pointer; /* ändert den Mauszeiger in einen Zeigefinger beim Hovern */
+    box-shadow:
+        0 0 8px #ffcb05,
+        0 0 16px rgba(255, 203, 5, 0.7); /* erzeugt gelben Glow um das gehoverte Element */
+}
+
+.mew { /* setzt ein Bild von Mew am Abschluss der Seite */
+    display: block;
+    margin: 30px auto;
+
+    width: 200px;   /* Größe */
+    height: auto;
+}

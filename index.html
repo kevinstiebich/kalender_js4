@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <title id="title">Kalenderblatt vom 13.07.2026</title>
+</head>
+
+<body>
+  <header>
+    <h1 id="main-headline">Kalenderblatt vom 13.07.2026</h1>
+    <p>Der <span class="dayToday"></span>. <span class="monthString"></span> <span class="year"></span> ist ein <span class="weekdayToday"></span> 
+      und zwar der <span id="weekdayCount"></span> <span class="weekdayToday"></span> im Monat <span class="monthString"></span> des Jahres <span class="year"></span>. 
+      Es handelt sich um den <span id="xDayOfTheYear"></span>. Tag des Jahres, was bedeutet, dass es noch <span id="xDaysRemaining"></span> Tage bis zum Jahresende sind. 
+      Der Monat <span class="monthString"></span> hat insgesamt <span id="daysThisMonth"></span> Tage. Heute ist <span id="holidayToday"></span> gesetzlicher Feiertag in Deutschland.</p>
+  </header>
+  <main>
+    <div class="content">
+            <table id="table">
+              <thead>
+                <tr>
+                  <th>Mo</th>
+                  <th>Di</th>
+                  <th>Mi</th>
+                  <th>Do</th>
+                  <th>Fr</th>
+                  <th>Sa</th>
+                  <th>So</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+              </tbody>
+            </table>
+            <div class="ereignisse">
+              <div class="leds">
+                <span class="led blau"></span>
+                <span class="led rot"></span>
+                <span class="led gelb"></span>
+              </div>
+              <h2>Historische Ereignisse am <span class="dayToday"></span>. <span class="monthString"></span></h2>
+              <div class="liste">
+                <ul id="ul">
+                </ul>
+              </div>
+            </div>
+      </div>
+    <img class="mew" src="assets/images/660-6601238_mew-sprite.png" alt="Mew">
+  </main>
+  <script src="script.js"></script>
+</body>
+
+</html>
