@@ -1,11 +1,18 @@
-const date = new Date();
+let date = new Date();
+let displayMonth = date.getMonth();
+let displayYear = date.getFullYear();
 
-main(date);
+main();
 
-function main(date) {
+function main() {
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
+
+    initialize(day, month, year);
+}
+
+function initialize(day, month, year) {
 
     writeTitle(day, month, year);
     writeHeadline(day, month, year);
@@ -17,8 +24,6 @@ function main(date) {
 }
 
 function clickPreviousMonth(day, month, year) {
-    let displayMonth = month;
-    let displayYear = year;
     const previousMonth = document.getElementById("previousMonth");
     previousMonth.addEventListener("click", () => {
 
@@ -34,8 +39,6 @@ function clickPreviousMonth(day, month, year) {
 }
 
 function clickNextMonth(day, month, year) {
-    let displayMonth = month;
-    let displayYear = year;
     const nextMonth = document.getElementById("nextMonth");
     nextMonth.addEventListener("click", () => {
 
@@ -50,15 +53,11 @@ function clickNextMonth(day, month, year) {
     });
 }
 
-function switchMonths(day, month, year) {
-    let displayMonth = month;
-    let displayYear = year;
-}
-
 // ########## CREATORS ########## //
 
 async function createRandomWikiEvent(day, month) {
     let ul = document.getElementById("ul");
+    ul.innerHTML = "";
     day = String(day).padStart(2, "0");
     month = String(month).padStart(2, "0");
     const url = `https://api.wikimedia.org/feed/v1/wikipedia/de/onthisday/all/${month}/${day}`
@@ -177,6 +176,10 @@ function createCalendar(day, month, year) {
                 } else if (monthStart == 6) td.className = "saturdays"; // Highlighted Samstage
             } else if (runner > 1 && runner <= getNumberOfDays(month, year)) {
                 td.textContent = runner;
+                td.addEventListener("click", () => {
+                    date = new Date(`${year}-${month + 1}-${parseInt(td.textContent)}`);
+                    initialize(date.getDate(), month, year);
+                });
                 if (j == 6) {
                     td.className = "sundays"; // Highlighted Sonntage
                 } else if (j == 5) td.className = "saturdays"; // Highlighted Samstage
@@ -348,7 +351,7 @@ function createAndSortRandomNumbers(size) {
 // ########## CALCULATORS ########## //
 
 //rechnet aus der wievielte Tag des Jahres heute ist
-function calcDayOfTheYear(day, month, year) {
+function calcDayOfTheYear(day,month, year) {
     let days = day;
     for (let i = 0; i < month; i++) {
         days += getNumberOfDays(month, year);
