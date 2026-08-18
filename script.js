@@ -1,8 +1,8 @@
 const date = new Date();
 
-main();
+main(date);
 
-function main() {
+function main(date) {
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
@@ -11,9 +11,48 @@ function main() {
     writeHeadline(day, month, year);
     writeText(day, month, year);
     createCalendar(day, month, year);
-    //createMuffinEvents(day, month + 1);
-    //createRandomWikiEventDOMParser(day, month);
     createRandomWikiEvent(day, month + 1);
+    clickNextMonth(day, month, year);
+    clickPreviousMonth(day, month, year);
+}
+
+function clickPreviousMonth(day, month, year) {
+    let displayMonth = month;
+    let displayYear = year;
+    const previousMonth = document.getElementById("previousMonth");
+    previousMonth.addEventListener("click", () => {
+
+        displayMonth--;
+
+        if (displayMonth < 0) {
+            displayMonth = 11;
+            displayYear--;
+        }
+
+        createCalendar(day, displayMonth, displayYear);
+    });
+}
+
+function clickNextMonth(day, month, year) {
+    let displayMonth = month;
+    let displayYear = year;
+    const nextMonth = document.getElementById("nextMonth");
+    nextMonth.addEventListener("click", () => {
+
+        displayMonth++;
+
+        if (displayMonth > 11) {
+            displayMonth = 0;
+            displayYear++;
+        }
+
+        createCalendar(day, displayMonth, displayYear);
+    });
+}
+
+function switchMonths(day, month, year) {
+    let displayMonth = month;
+    let displayYear = year;
 }
 
 // ########## CREATORS ########## //
@@ -87,7 +126,7 @@ async function createRandomWikiEvent(day, month) {
 } */
 
 //erstellt die historischen Events aus der Muffinseite - wird aktuell nicht aufgerufen
-function createMuffinEvents(day, month) {
+/* function createMuffinEvents(day, month) {
     let ul = document.getElementById("ul");
 
     fetch(`https://history.muffinlabs.com/date/${month}/${day}`)
@@ -105,20 +144,23 @@ function createMuffinEvents(day, month) {
             li.textContent = "Fehler beim Laden der historischen Events.";
             ul.appendChild(li);
         });
-}
+} */
 
 //passt den Kalender auf den aktuellen Monat an, setzt ein Highlight am aktuellen Tag und markiert Samstage und Sonntage in einem etwas dunkeleren Farbton
 function createCalendar(day, month, year) {
     let tbody = document.getElementById("tbody");
-    let monthStart = date.getDay() - day + 1;
+    tbody.innerHTML = "";
+    let monthStart = new Date(year, month, 1).getDay();
+    let daysBeforeFirst = (monthStart + 6) % 7;
     let runner = 1;
     let rowCount;
+
+    const tableHeadline = document.getElementById("tableHeadline");
+    tableHeadline.textContent = getMonthsName(month);
 
     while (monthStart < 0) {
         monthStart += 7;
     }
-
-    let daysBeforeFirst = monthStart - 1;
 
     rowCount = (Math.ceil((daysBeforeFirst + getNumberOfDays(month, year)) / 7)) - 1;
 
@@ -140,7 +182,7 @@ function createCalendar(day, month, year) {
                 } else if (j == 5) td.className = "saturdays"; // Highlighted Samstage
                 runner++;
             }
-            if (date.getDate() == td.textContent) {
+            if (date.getDate() == td.textContent && month == date.getMonth() && year == date.getFullYear()) {
                 td.className = "highlight"; // Highlighted den aktuellen Tag
             }
             if (isHoliday(td.textContent, month + 1, year) == "ein") {
@@ -176,7 +218,7 @@ function getMonthsName(month) {
     const months = [
         "Januar", 
         "Februar", 
-        "März", 
+        "Maerz", 
         "April", 
         "Mai", 
         "Juni", 

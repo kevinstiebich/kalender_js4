@@ -213,3 +213,27 @@ td:hover { /* erzeugt den Hover-Effekt im Kalender */
     width: 200px;   /* Größe */
     height: auto;
 }
+
+.month-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.month-navigation button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    padding: 0;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.2);
+}
+
+#tableHeadline {
+    font-size: 18px;
+}
