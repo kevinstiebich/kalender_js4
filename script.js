@@ -22,6 +22,8 @@ function initialize(day, month, year) {
     createRandomWikiEvent(day, month + 1);
 }
 
+// ########## CLICKER ########## //
+
 function clickPreviousMonth(day, month, year) {
     const previousMonth = document.getElementById("previousMonth");
     previousMonth.addEventListener("click", () => {
@@ -283,7 +285,6 @@ function writeText(day, month, year) {
     holidayToday.textContent = isHoliday(day, month + 1, year);
 }
 
-
 // ########## HELPER ########## //
 
 //prüft ob ein Jahr ein Schaltjahr ist
@@ -306,7 +307,7 @@ function isHoliday(day, month, year) {
     
     let holidays = [[1, 1], [easter[1], easter[0]], [goodFriday[1], goodFriday[0]], [easterMonday[1], easterMonday[0]], [ascensionOfChrist[1], ascensionOfChrist[0]], 
     [whitMonday[1], whitMonday[0]], [corpusChristi[1], corpusChristi[0]], [3, 10], [25, 12], [26, 12]];
-    console.log(holidays);
+
     for (let i = 0; i < holidays.length; i++) {
         if (day == holidays[i][0] && month == holidays[i][1]) {
             return isHoliday = "ein";
