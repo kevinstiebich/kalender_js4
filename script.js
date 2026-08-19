@@ -10,17 +10,16 @@ function main() {
     const year = date.getFullYear();
 
     initialize(day, month, year);
+    clickNextMonth(day, month, year);
+    clickPreviousMonth(day, month, year);
 }
 
 function initialize(day, month, year) {
-
     writeTitle(day, month, year);
     writeHeadline(day, month, year);
     writeText(day, month, year);
     createCalendar(day, month, year);
     createRandomWikiEvent(day, month + 1);
-    clickNextMonth(day, month, year);
-    clickPreviousMonth(day, month, year);
 }
 
 function clickPreviousMonth(day, month, year) {
@@ -170,6 +169,10 @@ function createCalendar(day, month, year) {
             let td = document.createElement("td");
             if (j == daysBeforeFirst && i == 0) {
                 td.textContent = 1;
+                td.addEventListener("click", () => {
+                    date = new Date(`${year}-${month + 1}-${parseInt(td.textContent)}`);
+                    initialize(date.getDate(), month, year);
+                });
                 runner++;
                 if (monthStart == 0) {
                     td.className = "sundays"; // Highlighted Sonntage
@@ -277,7 +280,7 @@ function writeText(day, month, year) {
     const daysThisMonth = document.getElementById("daysThisMonth");
     daysThisMonth.textContent = getNumberOfDays(month, year);
     const holidayToday = document.getElementById("holidayToday");
-    holidayToday.textContent = isHoliday(day, month + 1);
+    holidayToday.textContent = isHoliday(day, month + 1, year);
 }
 
 
@@ -303,7 +306,7 @@ function isHoliday(day, month, year) {
     
     let holidays = [[1, 1], [easter[1], easter[0]], [goodFriday[1], goodFriday[0]], [easterMonday[1], easterMonday[0]], [ascensionOfChrist[1], ascensionOfChrist[0]], 
     [whitMonday[1], whitMonday[0]], [corpusChristi[1], corpusChristi[0]], [3, 10], [25, 12], [26, 12]];
-    
+    console.log(holidays);
     for (let i = 0; i < holidays.length; i++) {
         if (day == holidays[i][0] && month == holidays[i][1]) {
             return isHoliday = "ein";
@@ -389,7 +392,7 @@ function calcEaster(year) {
 }
 
 function calcHolidays(addend, year) {
-    let holiday = calcEaster();
+    let holiday = calcEaster(year);
     holiday[1] += addend;
     if (addend > 0) {
         while (holiday[1] > getNumberOfDays(holiday[0], year)) {
